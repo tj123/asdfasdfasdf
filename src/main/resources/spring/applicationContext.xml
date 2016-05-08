@@ -8,6 +8,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <import resource="spring-mvc.xml"/>
+    <import resource="spring-properties.xml"/>
     <import resource="spring-dbcp2.xml"/>
     <import resource="spring-redis.xml"/>
 

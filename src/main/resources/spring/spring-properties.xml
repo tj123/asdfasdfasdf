@@ -6,16 +6,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan base-package="com.shundian.red.web.action" />
-	<context:component-scan base-package="com.shundian.red.web.service.impl" />
-	<context:component-scan base-package="com.shundian.red.web.dao.impl" />
-	<context:annotation-config />
-	<mvc:annotation-driven />
-
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:mysql.properties</value>
+				<value>classpath:redis.properties</value>
+			</list>
+		</property>
 	</bean>
 
 

@@ -1,5 +1,6 @@
 package com.shundian.red;
 
+import com.shundian.red.lib.dao.DbTemplate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:../../../../../main/webapp/WEB-INF/spring/spring-dbcp2.xml")
+@ContextConfiguration("file:src/main/resources/spring/spring-dbcp2.xml")
 public class MysqlTest {
 
 	@Autowired
-	private JdbcTemplate template;
+	private DbTemplate template;
 	
 	@Test
 	public void insert(){

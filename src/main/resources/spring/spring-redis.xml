@@ -13,8 +13,6 @@
     </bean>
 
 
-
-
     <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="hostName" value="${redis.hostName}"/>
         <property name="password" value="${redis.password}"/>

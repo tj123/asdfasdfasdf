@@ -1,0 +1,56 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">-->
+    <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+    <!--<property name="url" value="jdbc:mysql:///test1?characterEncoding=utf-8"/>-->
+    <!--<property name="username" value="root"/>-->
+    <!--<property name="password" value=""/>-->
+    <!--<property name="maxActive" value="100"/>-->
+    <!--<property name="maxIdle" value="30"/>-->
+    <!--<property name="maxWait" value="1000"/>-->
+    <!--</bean>-->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+    </bean>
+
+    <bean class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- Service, Dao 不声明接口，声明类。必须指明AOP所代理的对象是一个类代理 -->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut expression="execution(* com.shundian.red.web.service.impl.*.*(..))" id="serviceMethod"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/>
+    </aop:config>
+</beans>

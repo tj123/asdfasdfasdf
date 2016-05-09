@@ -2,7 +2,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven {
-            url 'http://127.0.0.1:8081/nexus/content/groups/public/'
+            url 'http://192.168.1.20:8081/nexus/content/groups/public/'
         }
     }
     dependencies {
@@ -37,7 +37,7 @@ ext {
 repositories {
     mavenLocal()
     maven {
-        url "http://127.0.0.1:8081/nexus/content/groups/public/"
+        url "http://192.168.1.20:8081/nexus/content/groups/public/"
     }
 }
 

@@ -20,7 +20,7 @@ public class RedisDaoImpl implements RedisDao{
 	
 	public void add(UserDto user) {
 		String sql = "insert into user value(?,?,?,?)";
-		db.update(sql, user.getGuid(),user.getUsername(),user.getPassword(),user.getSex());
+		db.update(sql, user.getGuid(), user.getUsername(), user.getPassword(), user.getSex());
 	}
 
 	public List<Map<String, Object>> listUser() {

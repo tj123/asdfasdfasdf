@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/resources/spring/spring-dbcp2.xml")
+@ContextConfiguration("file:../../../../../main/webapp/WEB-INF/spring/spring-dbcp2.xml")
 public class MysqlTest {
 
 	@Autowired
